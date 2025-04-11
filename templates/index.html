@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taxi Prediction</title>
+  <style>
+    body {
+      background: url('/static/TAXI_DB.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+      padding-top: 50px;
+      text-align: center;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    .top-bar button {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid white;
+      padding: 8px 16px;
+      margin-left: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      width: 50%;
+      margin: auto;
+      border-radius: 20px;
+      /*backdrop-filter: blur(6px);*/
+    }
+
+    input[type="file"],
+    select,
+    button {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid white;
+      backdrop-filter: blur(4px);
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #result img {
+      margin-top: 20px;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .about {
+      margin-top: 60px;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+      line-height: 1.6;
+      /*backdrop-filter: blur(6px);*/
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <button onclick="window.location.href='/login'">Login</button>
+    <button onclick="window.location.href='/register'">Register</button>
+  </div>
+
+  <div class="container">
+    <h1>Taxi ML Prediction App</h1>
+    <form id="upload-form">
+      <select name="model" required>
+        <option value="">Select Model</option>
+        <option value="sarima">SARIMA</option>
+        <option value="gradient">Gradient Boosting</option>
+        <option value="kmeans">KMeans</option>
+        <option value="random_forest">Random Forest</option>
+      </select>
+      <br />
+      <input type="file" name="csv_file" accept=".csv" required />
+      <br />
+      <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <div class="about">
+    <h2>About Me</h2>
+    <p>
+      Welcome to the Taxi ML Prediction App. This tool helps analyze taxi trip data using machine learning models.
+      Upload your CSV, select a model, and visualize your predictions easily. Developed with ❤️ for data enthusiasts
+      and city mobility analysis.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("upload-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch("/predict_csv", {
+        method: "POST",
+        body: formData,
+      })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const imgURL = URL.createObjectURL(blob);
+        document.getElementById("result").innerHTML =
+          "<h3>Prediction Graph:</h3><img src='" + imgURL + "' />";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Prediction failed.");
+      });
+    });
+  </script>
+</body>
+</html>
