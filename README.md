@@ -16,7 +16,7 @@ This project focuses on analyzing taxi service data to uncover key insights and 
 - [How to Run](#how-to-run)
 - [Future Work](#future-work)
 - [Screenshots](#screenshots)
-- [License](#license)
+
 
 ---
 
