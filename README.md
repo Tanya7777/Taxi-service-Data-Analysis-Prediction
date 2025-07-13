@@ -1,136 +1,145 @@
 # Taxi-service-Data-Analysis-Prediction
 
-This project focuses on analyzing taxi service data to uncover key insights and build predictive models to forecast ride demand and revenue trends. Using machine learning techniques and data visualization, it helps understand customer behavior, trip patterns, and influential features for business optimization.
+This project focuses on performing end-to-end exploratory data analysis (EDA), feature engineering, and machine learning modeling on taxi service trip records to uncover insights and forecast future demand. The goal is to help taxi businesses make data-driven decisions by understanding ride patterns and predicting key metrics like trip duration, fare amount, and pickup demand.
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Objectives](#objectives)
 - [Dataset](#dataset)
-- [Technologies Used](#technologies-used)
-- [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
-- [Modeling & Prediction](#modeling--prediction)
-- [Results](#results)
-- [How to Run](#how-to-run)
+- [Tools & Technologies](#tools--technologies)
+- [Data Science Workflow](#data-science-workflow)
+- [Key Findings](#key-findings)
+- [Models Used](#models-used)
+- [Installation & Usage](#installation--usage)
 - [Future Work](#future-work)
-- [Screenshots](#screenshots)
 
 
 ---
 
-## 🧠 Overview
+## Overview
 
-In urban areas, taxi services are a major part of public transportation. The goal of this project is to analyze historical taxi trip data and build predictive models to:
-- Understand key patterns in demand, distance, trip duration, and earnings.
-- Forecast future ride demand using regression and time series methods.
-- Aid taxi companies in dynamic pricing, resource allocation, and improving customer service.
+Taxi companies generate large volumes of data through GPS-enabled trip logs. This project leverages such data to extract business insights and develop predictive models that can assist in:
 
----
-
-## 🎯 Objectives
-
-- Perform data cleaning and preprocessing on raw taxi trip data.
-- Explore ride trends by time, location, and fare metrics.
-- Predict:
-  - Total ride demand (trip count)
-  - Trip duration or fare amount
-- Visualize trends using dashboards and plots.
-- Evaluate model performance with relevant metrics.
+- Identifying peak hours, high-demand zones  
+- Predicting trip duration based on route and time  
+- Forecasting fare amounts using geospatial and time data  
+- Understanding seasonality and customer behavior  
 
 ---
 
-## 📂 Dataset
+## Objectives
 
-- Source: [NYC Taxi Dataset / Kaggle / Custom Collected]
-- Size: ~X MB / ~Y records
-- Key features:
-  - `pickup_datetime`, `dropoff_datetime`
-  - `pickup_location`, `dropoff_location`
-  - `passenger_count`, `trip_distance`
-  - `fare_amount`, `payment_type`
+- Perform in-depth EDA on historical taxi trip data  
+- Visualize trip patterns using geospatial and time-based plots  
+- Build regression models to predict fare and trip duration  
+- Evaluate model performance and compare techniques  
+- Translate findings into actionable insights for stakeholders  
 
 ---
 
-## 🛠️ Technologies Used
+## Dataset
 
-- **Languages:** Python
-- **Libraries:**
-  - Data Analysis: `pandas`, `numpy`
-  - Visualization: `matplotlib`, `seaborn`, `plotly`
-  - Machine Learning: `scikit-learn`, `xgboost`, `statsmodels`
-  - Optional: `streamlit` or `Flask` for dashboard/web app
+The dataset used for this project is based on the official [NYC Taxi Trip Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), consisting of millions of records with the following fields:
 
----
+- Pickup & Drop-off datetime  
+- Pickup & Drop-off latitude and longitude  
+- Trip distance and duration  
+- Passenger count  
+- Fare amount, payment type  
+- Vendor ID  
 
-## 📊 Exploratory Data Analysis (EDA)
-
-- Ride frequency vs. time (hourly/daily/monthly)
-- Heatmaps of pickup and drop-off locations
-- Distribution of fare amounts and distances
-- Correlation between features (e.g., distance vs. fare)
-- Outlier detection and handling
+> Note: The dataset was cleaned and filtered for modeling.
 
 ---
 
-## 🤖 Modeling & Prediction
+## Tools & Technologies
 
-Implemented machine learning models:
-- **Regression Models**: Linear Regression, Random Forest, XGBoost
-- **Clustering**: K-Means for ride pattern grouping
-- **Time Series**: ARIMA, Prophet (optional)
-
-Evaluated using:
-- MAE, RMSE, R² Score
-
----
-
-## ✅ Results
-
-- Achieved an R² score of **X.XX** using [Best Model].
-- Discovered peak hours and regions of high taxi demand.
-- Fare prediction error reduced by **Y%** after feature engineering.
+- **Programming**: Python  
+- **Data Analysis**: Pandas, NumPy  
+- **Visualization**: Matplotlib, Seaborn, Plotly, Folium  
+- **Machine Learning**: Scikit-learn, XGBoost, LightGBM  
+- **Geospatial Analysis**: Geopandas, Folium  
+- **Notebook Environment**: Jupyter Notebook  
 
 ---
 
-## 🧪 How to Run
+## Data Science Workflow
 
-1. Clone the repo  
+1. **Data Cleaning**  
+   - Removed nulls, duplicates, and invalid GPS coordinates  
+   - Handled outliers in trip duration and fare  
+
+2. **Exploratory Data Analysis (EDA)**  
+   - Time series analysis of trip counts  
+   - Fare vs. distance relationships  
+   - Demand heatmaps by time and location  
+
+3. **Feature Engineering**  
+   - Extracted date-time features: hour, weekday, month  
+   - Calculated Haversine distance between pickup and drop-off  
+   - Added traffic proxy using timestamp clustering  
+
+4. **Model Development**  
+   - Trained and tuned multiple regression models  
+   - Compared performance using RMSE, MAE, and R²  
+
+5. **Evaluation & Interpretation**  
+   - Analyzed feature importance  
+   - Visualized prediction errors and outliers  
+
+---
+
+## Key Findings
+
+- Peak ride demand occurs during weekday rush hours (8–10 AM, 5–7 PM)  
+- Trips shorter than 3 km tend to have higher per-km fare due to base charges  
+- Downtown and airport zones see highest ride density  
+- Distance and time of day are strong predictors of fare  
+
+---
+
+## Models Used
+
+| Model         | Purpose                   | Performance Metric      |
+|---------------|----------------------------|--------------------------|
+| Linear Regression | Baseline regression     | MAE / RMSE               |
+| Random Forest    | Non-linear predictions  | Lower RMSE than baseline |
+| XGBoost          | Optimized regression    | Best R² performance      |
+| LightGBM         | Fast training, scalable | Competitive accuracy     |
+
+---
+
+## Installation & Usage
+
+1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/Taxi-service-Data-Analysis-Prediction.git
+git clone https://github.com/Tanya7777/Taxi-service-Data-Analysis-Prediction.git
 cd Taxi-service-Data-Analysis-Prediction
 ```
 
-2. Install dependencies  
+2. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run notebook or script  
+3. **Launch the notebook**
 ```bash
 jupyter notebook taxi_analysis.ipynb
 ```
 
-4. (Optional) Launch dashboard  
-```bash
-streamlit run dashboard.py
-```
-
 ---
 
-## 🔮 Future Work
+## Future Work
 
-- Integrate live weather and traffic data for better predictions.
-- Deploy prediction API using Flask/FastAPI.
-- Add real-time ride demand heatmaps.
-- Develop mobile-friendly web dashboard.
+- Deploy fare prediction model as a REST API  
+- Add real-time map-based ride prediction dashboard  
+- Incorporate weather and traffic data into features  
+- Improve geospatial clustering for route optimization  
 
----
 
-## 📷 Screenshots
 
-*(Insert visuals of data plots, model results, dashboards here)*
 
----
 
